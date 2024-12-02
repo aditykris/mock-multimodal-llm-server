@@ -1,10 +1,10 @@
 import uuid,time
 
-from fastapi import Request
+from fastapi import Request,HTTPException
 from fastapi.responses import StreamingResponse
 
 from utils import generate_stream_response
-from models import Usage
+from models import Usage,ImageGenerationResponse
 
 def chat_completion_service(request : Request):
     '''Function to return mock responses'''
@@ -48,5 +48,25 @@ def chat_completion_service(request : Request):
         }],
         "usage": Usage()
     }
+
+    return response
+
+
+def image_generation_service(request: Request):
+    '''Function to return image urls'''
+    n = request.n or 1
+    if n < 1 or n > 10:
+        raise HTTPException(status_code=400, detail="Number of images must be between 1 and 10")
+
+    # Generate mock image URLs
+    image_urls = [
+        {"url": f"https://example.com/generated-image-{i+1}.jpg"}
+        for i in range(n)
+    ]
+
+    response = ImageGenerationResponse(
+        created=int(time.time()),
+        data=image_urls
+    )
 
     return response

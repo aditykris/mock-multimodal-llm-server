@@ -8,6 +8,7 @@ This server currently supports three types of requests:
 1. **Regular Chat Completion**: Handles standard conversational interactions.
 2. **Image Analysis Requests**: Processes image-related queries and provides responses based on analysis.
 3. **Streaming Responses**: Streams responses that OpenAI streaming responses.
+4. **Image Generation APIs**: Handles image generation urls and provides requested number of sample image urls.
 
 ## Installation
 
