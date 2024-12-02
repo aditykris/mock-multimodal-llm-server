@@ -53,4 +53,13 @@ class ChatResponse(BaseModel):
     system_fingerprint: str
     choices: List[Choice]
     usage: Usage
-    
+
+class ImageGenerationRequest(BaseModel):
+    model: str
+    prompt: str
+    n: Optional[int] = 1
+    size: Optional[str]
+
+class ImageGenerationResponse(BaseModel):
+    created: int
+    data: List[ImageUrl]

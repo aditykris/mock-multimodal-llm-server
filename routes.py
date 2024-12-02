@@ -1,10 +1,10 @@
 
-from typing import Annotated
 
-from fastapi import APIRouter, Request, Header, UploadFile, File
+from fastapi import APIRouter, Header
 
-from models import ChatRequest
-from services import chat_completion_service
+from models import ChatRequest,ImageGenerationRequest
+from services import chat_completion_service,image_generation_service
+
 # APIRouter.
 router = APIRouter()
 
@@ -14,3 +14,10 @@ async def chat_completion(
     authorization: str = Header(None)
 ):
     return chat_completion_service(request)
+
+@router.post("/v1/images/generations")
+async def image_generations(
+    request: ImageGenerationRequest,
+    authorization: str = Header(None)
+):
+    return image_generation_service(request)
